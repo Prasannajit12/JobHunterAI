@@ -1,0 +1,90 @@
+[
+    {
+        "id": 1,
+        "title": "Technical Support Engineer",
+        "company": "Microsoft",
+        "location": "Hyderabad",
+        "experience": 2,
+        "salary": 600000,
+        "job_type": "Full-Time",
+        "skills": [
+            "Windows",
+            "Active Directory",
+            "Networking",
+            "SQL",
+            "Office 365"
+        ],
+        "description": "Provide technical support to enterprise customers and troubleshoot Windows-based environments.",
+        "link": "https://careers.microsoft.com"
+    },
+    {
+        "id": 2,
+        "title": "Application Support Engineer",
+        "company": "Infosys",
+        "location": "Hyderabad",
+        "experience": 2,
+        "salary": 500000,
+        "job_type": "Full-Time",
+        "skills": [
+            "SQL",
+            "Python",
+            "Windows",
+            "Ticketing",
+            "Customer Support"
+        ],
+        "description": "Support enterprise applications, resolve incidents, and work with SQL databases.",
+        "link": "https://careers.infosys.com"
+    },
+    {
+        "id": 3,
+        "title": "Service Desk Analyst",
+        "company": "TCS",
+        "location": "Bangalore",
+        "experience": 1,
+        "salary": 450000,
+        "job_type": "Full-Time",
+        "skills": [
+            "Windows",
+            "Networking",
+            "Customer Support",
+            "Email Support"
+        ],
+        "description": "Handle Level-1 IT support requests through phone, email, and ticketing systems.",
+        "link": "https://careers.tcs.com"
+    },
+    {
+        "id": 4,
+        "title": "IT Support Engineer",
+        "company": "Kyndryl",
+        "location": "Hyderabad",
+        "experience": 2,
+        "salary": 650000,
+        "job_type": "Hybrid",
+        "skills": [
+            "Windows",
+            "Active Directory",
+            "Office 365",
+            "Networking",
+            "Service Desk"
+        ],
+        "description": "Provide infrastructure and desktop support for enterprise clients.",
+        "link": "https://careers.kyndryl.com"
+    },
+    {
+        "id": 5,
+        "title": "Desktop Support Engineer",
+        "company": "HCLTech",
+        "location": "Hyderabad",
+        "experience": 2,
+        "salary": 550000,
+        "job_type": "Full-Time",
+        "skills": [
+            "Windows",
+            "Hardware Troubleshooting",
+            "Networking",
+            "Office 365"
+        ],
+        "description": "Provide desktop support, hardware troubleshooting, and software installation.",
+        "link": "https://www.hcltech.com/careers"
+    }
+]
