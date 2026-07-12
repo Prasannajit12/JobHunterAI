@@ -20,14 +20,23 @@ def get_recommendations():
     recommendations = []
 
     for job in jobs:
+
         recommendation = matcher.calculate_match(profile, job)
 
         recommendations.append({
-            "company": recommendation["company"],
-            "title": recommendation["title"],
+
+            "company": job.company,
+            "title": job.title,
+            "location": job.location,
+            "salary": job.salary,
+            "job_type": job.job_type,
+            "skills": job.skills,
+            "link": job.link,
+
             "score": recommendation["score"],
             "matched_skills": recommendation["matched_skills"],
             "reasons": recommendation["reasons"]
+
         })
 
     recommendations.sort(
