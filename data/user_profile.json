@@ -1,0 +1,13 @@
+{
+    "name": "Prasannajit Panigrahi",
+    "experience": 2,
+    "preferred_location": "Hyderabad",
+    "expected_salary": 400000,
+    "notice_period": "Immediate",
+    "skills": [
+        "Technical Support",
+        "Windows",
+        "SQL",
+        "Python"
+    ]
+}
