@@ -1,13 +1,17 @@
 {
     "name": "Prasannajit Panigrahi",
-    "experience": 2,
+    "experience": 0,
     "preferred_location": "Hyderabad",
     "expected_salary": 400000,
     "notice_period": "Immediate",
     "skills": [
-        "Technical Support",
-        "Windows",
+        "Customer Support",
+        "Excel",
+        "HTML",
+        "Java",
+        "Python",
+        "SEO",
         "SQL",
-        "Python"
+        "Technical Support"
     ]
 }
