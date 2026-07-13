@@ -12,36 +12,36 @@ app = FastAPI(
     version="1.0.0"
 )
 
-# ----------------------------
-# CORS
-# ----------------------------
+# -----------------------------
+# CORS Configuration
+# -----------------------------
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
         "http://localhost:5173",
-        "http://localhost:5174"
+        "http://localhost:5174",
+        "http://localhost:5175",
+        "http://localhost:5176",
     ],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
-# ----------------------------
-# API Routes
-# ----------------------------
+# -----------------------------
+# Register API Routes
+# -----------------------------
 app.include_router(jobs_router)
 app.include_router(profile_router)
 app.include_router(recommendations_router)
 app.include_router(resume_router)
 
-# ----------------------------
-# Home
-# ----------------------------
+# -----------------------------
+# Home Route
+# -----------------------------
 @app.get("/")
 def home():
-
     return {
-
-        "message": "🚀 Welcome to JobHunter AI"
-
+        "message": "🚀 Welcome to JobHunter AI Backend",
+        "status": "Running Successfully"
     }
