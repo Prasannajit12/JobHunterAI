@@ -5,12 +5,30 @@ export async function getProfile() {
     return response.json();
 }
 
+export async function getJobs() {
+    const response = await fetch(`${API_URL}/jobs`);
+    return response.json();
+}
+
 export async function getRecommendations() {
     const response = await fetch(`${API_URL}/recommendations`);
     return response.json();
 }
 
-export async function getJobs() {
-    const response = await fetch(`${API_URL}/jobs`);
+export async function uploadResume(file) {
+
+    const formData = new FormData();
+
+    formData.append("file", file);
+
+    const response = await fetch(
+        `${API_URL}/upload-resume`,
+        {
+            method: "POST",
+            body: formData
+        }
+    );
+
     return response.json();
+
 }

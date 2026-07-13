@@ -6,9 +6,14 @@ import ProfileCard from "../components/ProfileCard";
 import JobCard from "../components/JobCard";
 
 import {
-  getProfile,
-  getRecommendations
-} from "../services/api";
+    getProfile,
+    getRecommendations,
+    uploadResume
+} 
+
+from "../services/api";
+
+import ResumeAnalysis from "../components/ResumeAnalysis";
 
 function Dashboard() {
 
