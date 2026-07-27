@@ -5,28 +5,85 @@ class ProfileGenerator:
 
     def generate_profile(self, resume_text, skills):
 
-        profile = {
-            "name": "Unknown",
-            "experience": 0,
-            "preferred_location": "Hyderabad",
-            "expected_salary": 400000,
-            "notice_period": "Immediate",
-            "skills": skills
-        }
+        profile = {}
 
-        # -------- Name --------
-        words = resume_text.split()
+        # -----------------------------
+        # Name
+        # -----------------------------
+        first_line = resume_text.split("\n")[0].strip()
 
-        # First two words are usually the person's name
-        if len(words) >= 2:
-            profile["name"] = f"{words[0].title()} {words[1].title()}"
+        if len(first_line) > 3:
+            profile["name"] = first_line.title()
+        else:
+            profile["name"] = "Unknown"
 
-        # -------- Experience --------
-        lower_text = resume_text.lower()
+        # -----------------------------
+        # Experience
+        # -----------------------------
+        profile["experience"] = self.extract_experience(resume_text)
 
-        if "2 year" in lower_text or "2 years" in lower_text:
-            profile["experience"] = 2
-        elif "1 year" in lower_text or "1 years" in lower_text:
-            profile["experience"] = 1
+        # -----------------------------
+        # Preferred Location
+        # -----------------------------
+        if "hyderabad" in resume_text.lower():
+            profile["preferred_location"] = "Hyderabad"
+        else:
+            profile["preferred_location"] = "Remote"
+
+        # -----------------------------
+        # Expected Salary
+        # -----------------------------
+        profile["expected_salary"] = 400000
+
+        # -----------------------------
+        # Notice Period
+        # -----------------------------
+        profile["notice_period"] = "Immediate"
+
+        # -----------------------------
+        # Skills
+        # -----------------------------
+        profile["skills"] = skills
 
         return profile
+
+    def extract_experience(self, text):
+
+        text = text.lower()
+
+        # Pattern like:
+        # "2 years"
+        # "2 year"
+        match = re.search(r"(\d+)\s*\+?\s*years?", text)
+
+        if match:
+            return int(match.group(1))
+
+        # Count experience sections if no explicit years found
+        jobs = [
+            "aotax",
+            "fortunapix",
+            "tech mahindra",
+            "seoczar"
+        ]
+
+        count = 0
+
+        for job in jobs:
+            if job in text:
+                count += 1
+
+        if count == 0:
+            return 0
+
+        # Internship counts as 0.5 year
+        if count == 1:
+            return 1
+
+        if count == 2:
+            return 1
+
+        if count == 3:
+            return 2
+
+        return 2

@@ -1,20 +1,17 @@
 # Python
 __pycache__/
 *.pyc
-
-# Environment
-.env
+venv/
 .venv/
 
-# Logs
-logs/
+# Node
+node_modules/
 
-# Database
-*.db
+# Environment variables
+.env
 
 # VS Code
 .vscode/
 
-# OS files
-.DS_Store
-Thumbs.db
+# Backup files
+*.zip

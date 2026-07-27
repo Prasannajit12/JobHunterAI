@@ -7,11 +7,10 @@
   "expected_salary": "4 LPA",
   "notice_period": "Immediate",
   "skills": [
-    "Technical Support",
-    "Application Support",
     "Python",
     "FastAPI",
     "React",
-    "SQL"
+    "SQL",
+    "Technical Support"
   ]
 }

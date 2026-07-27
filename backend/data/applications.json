@@ -1,0 +1,62 @@
+[
+    {
+        "company": "Microsoft",
+        "title": "Technical Support Engineer",
+        "status": "Offer",
+        "applied_date": "2026-07-16"
+    },
+    {
+        "company": "Infosys",
+        "title": "IT Service Desk Engineer",
+        "status": "Offer",
+        "applied_date": "2026-07-15"
+    },
+    {
+        "company": "TCS",
+        "title": "Application Support Engineer",
+        "status": "Technical Interview",
+        "applied_date": "2026-07-14"
+    },
+    {
+        "company": "Accenture",
+        "title": "Cloud Support Associate",
+        "status": "Offer",
+        "applied_date": "2026-07-13"
+    },
+    {
+        "company": "Amazon",
+        "title": "IT Support Associate",
+        "status": "Offer",
+        "applied_date": "2026-07-12"
+    },
+    {
+        "company": "Google",
+        "title": "Technical Solutions Engineer",
+        "status": "Offer",
+        "applied_date": "2026-07-10"
+    },
+    {
+        "company": "Franziska Gareis - Dein Finanzmangement",
+        "title": "Vertriebsassistenz / Kundenbetreuung (m/w/d)",
+        "status": "Offer",
+        "applied_date": "2026-07-16"
+    },
+    {
+        "company": "Rockstardevelopers GmbH",
+        "title": "Machine Learning Engineer (m/w/d)",
+        "status": "Applied",
+        "applied_date": "2026-07-17"
+    },
+    {
+        "company": "Natalie Felsinger Consulting",
+        "title": "Senior International Marketing Manager, Nordics (m/w/d)",
+        "status": "Applied",
+        "applied_date": "2026-07-18"
+    },
+    {
+        "company": "zscaler",
+        "title": "Senior Sales Engineer - Germany",
+        "status": "Applied",
+        "applied_date": "2026-07-27"
+    }
+]

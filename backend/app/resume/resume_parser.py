@@ -1,19 +1,19 @@
-from PyPDF2 import PdfReader
+import pdfplumber
 
 
 class ResumeParser:
 
     def extract_text(self, file_path):
 
-        reader = PdfReader(file_path)
-
         text = ""
 
-        for page in reader.pages:
+        with pdfplumber.open(file_path) as pdf:
 
-            page_text = page.extract_text()
+            for page in pdf.pages:
 
-            if page_text:
-                text += page_text + "\n"
+                page_text = page.extract_text()
+
+                if page_text:
+                    text += page_text + "\n"
 
         return text
