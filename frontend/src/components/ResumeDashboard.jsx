@@ -2,27 +2,41 @@ import { useState } from "react";
 
 import ResumeUpload from "./ResumeUpload";
 import ResumeAnalysis from "./ResumeAnalysis";
+import ATSScore from "./ATSScore";
 
 function ResumeDashboard() {
 
     const [profile, setProfile] = useState(null);
     const [analysis, setAnalysis] = useState(null);
+    const [ats, setATS] = useState(null);
 
     function handleUploadSuccess(data) {
 
-        // Backend returns profile and ats
+        console.log("UPLOAD RESPONSE:", data);
+
         setProfile(data.profile);
-        setAnalysis(data.ats);
+        setATS(data.ats);
+        setAnalysis(data.analysis);
 
     }
 
     return (
 
-        <div>
+        <div
+            style={{
+                display: "flex",
+                flexDirection: "column",
+                gap: "30px"
+            }}
+        >
+
+            {/* Upload Resume */}
 
             <ResumeUpload
                 onUploadSuccess={handleUploadSuccess}
             />
+
+            {/* AI Generated Profile */}
 
             {
 
@@ -31,53 +45,149 @@ function ResumeDashboard() {
                     <div
                         style={{
                             background: "#1e293b",
-                            padding: "20px",
-                            borderRadius: "10px",
-                            marginBottom: "20px",
+                            borderRadius: "20px",
+                            padding: "30px",
                             color: "white",
-                            boxShadow: "0px 4px 10px rgba(0,0,0,0.3)"
+                            boxShadow: "0 15px 35px rgba(0,0,0,.35)"
                         }}
                     >
 
-                        <h2
+                        {/* Header */}
+
+                        <div
                             style={{
-                                marginBottom: "20px"
+                                display: "flex",
+                                alignItems: "center",
+                                marginBottom: "30px"
                             }}
                         >
-                            👤 AI Generated Profile
-                        </h2>
 
-                        <p>
-                            <strong>Name:</strong> {profile.name}
-                        </p>
+                            <div
+                                style={{
+                                    width: "90px",
+                                    height: "90px",
+                                    borderRadius: "50%",
+                                    background: "#2563eb",
+                                    display: "flex",
+                                    justifyContent: "center",
+                                    alignItems: "center",
+                                    fontSize: "38px",
+                                    fontWeight: "bold",
+                                    marginRight: "20px"
+                                }}
+                            >
+                                {profile.name.charAt(0)}
+                            </div>
 
-                        <p>
-                            <strong>Experience:</strong> {profile.experience} Years
-                        </p>
+                            <div>
 
-                        <p>
-                            <strong>Preferred Location:</strong> {profile.preferred_location}
-                        </p>
+                                <h2
+                                    style={{
+                                        margin: 0,
+                                        fontSize: "30px"
+                                    }}
+                                >
+                                    {profile.name}
+                                </h2>
 
-                        <p>
-                            <strong>Expected Salary:</strong> ₹{profile.expected_salary}
-                        </p>
+                                <p
+                                    style={{
+                                        color: "#94a3b8",
+                                        marginTop: "8px",
+                                        fontSize: "17px"
+                                    }}
+                                >
+                                    Technical Support Engineer
+                                </p>
 
-                        <p>
-                            <strong>Notice Period:</strong> {profile.notice_period}
-                        </p>
+                            </div>
+
+                        </div>
+
+                        {/* Info Cards */}
+
+                        <div
+                            style={{
+                                display: "grid",
+                                gridTemplateColumns: "repeat(2,1fr)",
+                                gap: "20px",
+                                marginBottom: "30px"
+                            }}
+                        >
+
+                            <div
+                                style={{
+                                    background: "#0f172a",
+                                    padding: "20px",
+                                    borderRadius: "15px"
+                                }}
+                            >
+                                <h4>📍 Location</h4>
+
+                                <p>{profile.preferred_location}</p>
+
+                            </div>
+
+                            <div
+                                style={{
+                                    background: "#0f172a",
+                                    padding: "20px",
+                                    borderRadius: "15px"
+                                }}
+                            >
+                                <h4>💼 Experience</h4>
+
+                                <p>{profile.experience} Years</p>
+
+                            </div>
+
+                            <div
+                                style={{
+                                    background: "#0f172a",
+                                    padding: "20px",
+                                    borderRadius: "15px"
+                                }}
+                            >
+                                <h4>💰 Expected Salary</h4>
+
+                                <p>
+
+                                    ₹{profile.expected_salary.toLocaleString()}
+
+                                </p>
+
+                            </div>
+
+                            <div
+                                style={{
+                                    background: "#0f172a",
+                                    padding: "20px",
+                                    borderRadius: "15px"
+                                }}
+                            >
+                                <h4>⏳ Notice Period</h4>
+
+                                <p>{profile.notice_period}</p>
+
+                            </div>
+
+                        </div>
+
+                        {/* Skills */}
 
                         <h3
                             style={{
-                                marginTop: "20px"
+                                marginBottom: "15px"
                             }}
                         >
-                            Skills
+                            🚀 Skills
                         </h3>
 
                         <div
                             style={{
-                                marginTop: "10px"
+                                display: "flex",
+                                flexWrap: "wrap",
+                                gap: "12px"
                             }}
                         >
 
@@ -90,12 +200,17 @@ function ResumeDashboard() {
                                         key={index}
 
                                         style={{
+
                                             background: "#2563eb",
-                                            padding: "8px 15px",
-                                            borderRadius: "20px",
-                                            marginRight: "10px",
-                                            marginBottom: "10px",
-                                            display: "inline-block"
+
+                                            padding: "10px 18px",
+
+                                            borderRadius: "25px",
+
+                                            fontWeight: "600",
+
+                                            fontSize: "15px"
+
                                         }}
 
                                     >
@@ -116,17 +231,13 @@ function ResumeDashboard() {
 
             }
 
-            {
+            {/* ATS Score */}
 
-                analysis && (
+            <ATSScore ats={ats} />
 
-                    <ResumeAnalysis
-                        analysis={analysis}
-                    />
+            {/* AI Resume Analysis */}
 
-                )
-
-            }
+            <ResumeAnalysis analysis={analysis} />
 
         </div>
 

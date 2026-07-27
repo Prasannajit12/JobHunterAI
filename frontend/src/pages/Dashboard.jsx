@@ -4,158 +4,239 @@ import Navbar from "../components/Navbar";
 import DashboardStats from "../components/DashboardStats";
 import ProfileCard from "../components/ProfileCard";
 import JobCard from "../components/JobCard";
+import ResumeDashboard from "../components/ResumeDashboard";
+import ResumeSkillDashboard from "../components/ResumeSkillDashboard";
+import JobSearch from "../components/JobSearch";
+import AnalyticsCards from "../components/AnalyticsCards";
 
 import {
     getProfile,
-    getRecommendations,
-    uploadResume
-} 
-
-from "../services/api";
-
-import ResumeAnalysis from "../components/ResumeAnalysis";
+    getLiveJobs,
+    searchJobs
+} from "../services/api";
 
 function Dashboard() {
 
-  const [profile, setProfile] = useState(null);
-  const [jobs, setJobs] = useState([]);
-  const [search, setSearch] = useState("");
+    const [profile, setProfile] = useState(null);
 
-  useEffect(() => {
+    const [jobs, setJobs] = useState([]);
 
-    async function loadData() {
+    useEffect(() => {
 
-      try {
+        loadDashboard();
 
-        const profileData = await getProfile();
-        const recommendationData = await getRecommendations();
+    }, []);
 
-        setProfile(profileData);
-        setJobs(recommendationData);
+    async function loadDashboard() {
 
-      } catch (error) {
+        try {
 
-        console.error(error);
+            const profileData = await getProfile();
 
-      }
+            const liveJobs = await getLiveJobs();
+
+            setProfile(profileData);
+
+            setJobs(liveJobs);
+
+        }
+
+        catch (error) {
+
+            console.error(error);
+
+        }
 
     }
 
-    loadData();
+    async function handleSearch(filters) {
 
-  }, []);
+        try {
 
-  if (!profile) {
+            const results = await searchJobs(filters);
+
+            setJobs(results);
+
+        }
+
+        catch (error) {
+
+            console.error(error);
+
+        }
+
+    }
+
+    if (!profile) {
+
+        return (
+
+            <div className="bg-slate-900 min-h-screen flex justify-center items-center text-white text-3xl">
+
+                Loading...
+
+            </div>
+
+        );
+
+    }
 
     return (
-      <div className="bg-slate-900 min-h-screen flex justify-center items-center text-white text-3xl">
-        Loading...
-      </div>
-    );
 
-  }
+        <div className="bg-slate-900 min-h-screen text-white">
 
-  const filteredJobs = jobs.filter((job) =>
+            <div className="max-w-7xl mx-auto px-8 py-8">
 
-    job.title.toLowerCase().includes(search.toLowerCase()) ||
+                {/* Navbar */}
 
-    job.company.toLowerCase().includes(search.toLowerCase()) ||
+                <Navbar />
 
-    job.skills.join(" ").toLowerCase().includes(search.toLowerCase())
+                {/* Welcome */}
 
-  );
+                <div className="mb-8">
 
-  return (
+                    <h1 className="text-4xl font-bold">
 
-    <div className="bg-slate-900 min-h-screen text-white">
+                        Welcome Back 👋
 
-      <div className="max-w-7xl mx-auto px-8 py-8">
+                    </h1>
 
-        <Navbar />
+                    <p className="text-gray-400 mt-2">
 
-        <div className="mb-8">
+                        Here's your AI Powered Career Dashboard.
 
-          <h1 className="text-4xl font-bold">
+                    </p>
 
-            Welcome Back 👋
+                </div>
 
-          </h1>
+                {/* Dashboard Stats */}
 
-          <p className="text-gray-400 mt-2">
+                <AnalyticsCards />
+                <div className="mt-8">
+                        <DashboardStats
 
-            Here's your AI-powered Job Dashboard.
+                        experience={profile.experience}
 
-          </p>
-
-        </div>
-
-        <DashboardStats
-
-          experience={profile.experience}
-
-          jobs={jobs.length}
-
-        />
-
-        <div className="grid grid-cols-12 gap-8 mt-8">
-
-          <div className="col-span-4">
-
-            <ProfileCard profile={profile} />
-
-          </div>
-
-          <div className="col-span-8">
-
-            <div className="flex justify-between items-center mb-6">
-
-              <h2 className="text-3xl font-bold">
-
-                🤖 AI Recommended Jobs
-
-              </h2>
-
-              <input
-
-                type="text"
-
-                placeholder="🔍 Search..."
-
-                value={search}
-
-                onChange={(e) => setSearch(e.target.value)}
-
-                className="bg-slate-800 border border-slate-700 rounded-lg px-4 py-3 w-80"
-
-              />
-
-            </div>
-
-            <div className="space-y-6">
-
-              {filteredJobs.map((job, index) => (
-
-                <JobCard
-
-                  key={index}
-
-                  job={job}
+                        jobs={jobs.length}
 
                 />
+                </div>
 
-              ))}
+                {/* Resume Intelligence */}
+
+                <div className="mt-8">
+
+                    <ResumeSkillDashboard />
+
+                </div>
+
+                {/* Smart Search */}
+
+                <div className="mt-8">
+
+                    <JobSearch
+
+                        onSearch={handleSearch}
+
+                    />
+
+                </div>
+
+                {/* Main Grid */}
+
+                <div className="grid grid-cols-12 gap-8 mt-8">
+
+                    {/* Left */}
+
+                    <div className="col-span-4">
+
+                        <ProfileCard
+
+                            profile={profile}
+
+                        />
+
+                    </div>
+
+                    {/* Right */}
+
+                    <div className="col-span-8">
+
+                        <h2 className="text-3xl font-bold mb-6">
+
+                            🇮🇳 Job Search Results
+
+                        </h2>
+
+                        {
+
+                            jobs.length === 0 ?
+
+                                (
+
+                                    <div className="bg-slate-800 rounded-xl p-10 text-center">
+
+                                        <h2 className="text-2xl">
+
+                                            No Jobs Found 😔
+
+                                        </h2>
+
+                                        <p className="text-gray-400 mt-2">
+
+                                            Try changing your filters.
+
+                                        </p>
+
+                                    </div>
+
+                                )
+
+                                :
+
+                                (
+
+                                    <div className="space-y-6">
+
+                                        {
+
+                                            jobs.map((job, index) => (
+
+                                                <JobCard
+
+                                                    key={index}
+
+                                                    job={job}
+
+                                                />
+
+                                            ))
+
+                                        }
+
+                                    </div>
+
+                                )
+
+                        }
+
+                    </div>
+
+                </div>
+
+                {/* Resume Analyzer */}
+
+                <div className="mt-12">
+
+                    <ResumeDashboard />
+
+                </div>
 
             </div>
 
-          </div>
-
         </div>
 
-      </div>
-
-    </div>
-
-  );
+    );
 
 }
 

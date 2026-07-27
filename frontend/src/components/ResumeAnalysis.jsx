@@ -8,110 +8,91 @@ function ResumeAnalysis({ analysis }) {
 
         <div
             style={{
-                background: "#1e293b",
+                background: "#0f172a",
                 padding: "25px",
-                borderRadius: "15px",
-                marginTop: "20px",
-                color: "white"
+                borderRadius: "18px",
+                marginTop: "30px",
+                color: "white",
+                border: "1px solid #334155",
+                boxShadow: "0 10px 30px rgba(0,0,0,0.35)"
             }}
         >
 
-            <h2>🤖 AI Resume Analysis</h2>
-
-            <br />
-
-            <h3>
-
-                ATS Score
-
-            </h3>
-
-            <div
+            <h2
                 style={{
-                    width: "100%",
-                    height: "22px",
-                    background: "#374151",
-                    borderRadius: "20px",
-                    overflow: "hidden"
+                    marginBottom: "25px",
+                    fontSize: "28px",
+                    color: "#38bdf8"
                 }}
             >
+                🤖 AI Resume Analysis
+            </h2>
 
-                <div
-                    style={{
-                        width: `${analysis.score}%`,
-                        height: "100%",
-                        background: "#22c55e",
-                        transition: "0.5s"
-                    }}
-                />
+            {/* Strengths */}
+
+            <div style={{ marginBottom: "25px" }}>
+
+                <h3 style={{ color: "#22c55e" }}>
+                    💪 Strengths
+                </h3>
+
+                {
+
+                    analysis.strengths.map((item, index) => (
+
+                        <p key={index}>
+                            ✅ {item}
+                        </p>
+
+                    ))
+
+                }
 
             </div>
 
-            <h2
-                style={{
-                    color: "#22c55e",
-                    marginTop: "15px"
-                }}
-            >
+            {/* Weaknesses */}
 
-                {analysis.score}%
+            <div style={{ marginBottom: "25px" }}>
 
-            </h2>
+                <h3 style={{ color: "#ef4444" }}>
+                    ⚠ Missing Skills
+                </h3>
 
-            <hr />
+                {
 
-            <h3>
+                    analysis.weaknesses.map((item, index) => (
 
-                ✅ Matched Skills
+                        <p key={index}>
+                            ❌ {item}
+                        </p>
 
-            </h3>
+                    ))
 
-            <p>
+                }
 
-                {analysis.matched_count}
+            </div>
 
-                {" "}
+            {/* Suggestions */}
 
-                of
+            <div>
 
-                {" "}
+                <h3 style={{ color: "#facc15" }}>
+                    💡 AI Suggestions
+                </h3>
 
-                {analysis.total_required}
+                {
 
-                {" "}
+                    analysis.suggestions.map((item, index) => (
 
-                skills matched.
+                        <p key={index}>
+                            ⭐ {item}
+                        </p>
 
-            </p>
+                    ))
 
-            <br />
+                }
 
-            {
-
-                analysis.matched_skills.map((skill, index) => (
-
-                    <span
-
-                        key={index}
-
-                        style={{
-                            background: "#2563eb",
-                            padding: "8px 15px",
-                            borderRadius: "20px",
-                            marginRight: "10px",
-                            marginBottom: "10px",
-                            display: "inline-block"
-                        }}
-
-                    >
-
-                        {skill}
-
-                    </span>
-
-                ))
-
-            }
+            </div>
 
         </div>
 
