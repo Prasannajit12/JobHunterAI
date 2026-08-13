@@ -1,8 +1,9 @@
 from fastapi import APIRouter
 
 from app.services.profile_service import ProfileService
-from app.services.job_service import JobService
-from app.matcher.resume_matcher import ResumeMatcher
+from app.services.job_service import job_service
+from app.services.match_service import calculate_match
+
 
 router = APIRouter()
 
@@ -11,32 +12,46 @@ router = APIRouter()
 def get_recommendations():
 
     profile_service = ProfileService()
-    job_service = JobService()
-    matcher = ResumeMatcher()
 
     profile = profile_service.get_profile()
-    jobs = job_service.get_jobs()
+    jobs = job_service.get_all_jobs()
 
     recommendations = []
 
     for job in jobs:
 
-        recommendation = matcher.calculate_match(profile, job)
+        # Pass the COMPLETE profile and COMPLETE job
+        # because the advanced matcher needs:
+        # skills + experience + location + salary
+        match = calculate_match(
+            profile,
+            job
+        )
 
         recommendations.append({
 
-            "company": job.company,
-            "title": job.title,
-            "location": job.location,
-            "salary": job.salary,
-            "job_type": job.job_type,
-            "skills": job.skills,
-            "link": job.link,
+            "id": job.get("id"),
+            "company": job.get("company"),
+            "title": job.get("title"),
+            "location": job.get("location"),
+            "salary": job.get("salary"),
+            "experience": job.get("experience"),
+            "work_mode": job.get("work_mode"),
+            "skills": job.get("skills", []),
+            "url": job.get("url"),
 
-            "score": recommendation["score"],
-            "matched_skills": recommendation["matched_skills"],
-            "reasons": recommendation["reasons"]
+            "score": match["score"],
 
+            "skill_score": match["skill_score"],
+            "title_score": match["title_score"],
+            "experience_score": match["experience_score"],
+            "location_score": match["location_score"],
+            "salary_score": match["salary_score"],
+
+            "matched_skills": match["matched_skills"],
+            "missing_skills": match["missing_skills"],
+
+            "recommendation": match["recommendation"]
         })
 
     recommendations.sort(
